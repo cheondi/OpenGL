@@ -6,19 +6,19 @@
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow *window);
 
-// ½ºÅ©¸° Å©±â
+// ìŠ¤í¬ë¦° í¬ê¸°
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
 
 int main()
 {
-    // glfw ÃÊ±âÈ­
+    // glfw ì´ˆê¸°í™”
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    // window »ı¼º
+    // window ìƒì„±
     GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "songsmir GL", NULL, NULL);
     if (window == NULL)
     {
@@ -26,29 +26,29 @@ int main()
         glfwTerminate();
         return -1;
     }
-    // ÇöÀç À©µµ¿ì¿¡ context¸¦ ¼³Á¤
+    // í˜„ì¬ ìœˆë„ìš°ì— contextë¥¼ ì„¤ì •
     glfwMakeContextCurrent(window);
-    // bufferÀÇ Å©±â°¡ º¯°æµÉ ¶§ È£ÃâµÇ´Â Äİ¹é
+    // bufferì˜ í¬ê¸°ê°€ ë³€ê²½ë  ë•Œ í˜¸ì¶œë˜ëŠ” ì½œë°±
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
-    // glad ·Îµå
+    // glad ë¡œë“œ
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
     {
         std::cout << "Failed to initialize GLAD" << std::endl;
         return -1;
     }
 
-    // ¸ŞÀÎ ·çÇÁ
+    // ë©”ì¸ ë£¨í”„
     while (!glfwWindowShouldClose(window))
     {
-        // ÀÔ·Â Ã³¸®
+        // ì…ë ¥ ì²˜ë¦¬
         processInput(window);
 
-        // ¹öÆÛ ÃÊ±âÈ­
+        // ë²„í¼ ì´ˆê¸°í™”
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
        
-        // ¹öÆÛ Ãâ·Â
+        // ë²„í¼ ì¶œë ¥
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
