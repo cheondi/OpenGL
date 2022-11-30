@@ -8,13 +8,21 @@
     },
     "tasks": [
         {
-            "label": "C ++ 용으로 저장 및 컴파일",
-            "command": "g ++",
+            "label": "save and compile for C++",
+            "command": "g++",
             "args": [
-                "$ {workspaceRoot} /src/main.cpp",
+                "${workspaceRoot}/main.cpp",
+                "${workspaceRoot}/dependencies/GLAD/src/glad.c",
                 "-g",
+                "-I${workspaceRoot}/dependencies/GLFW/include",
+                "-I${workspaceFolder}/dependencies/GLAD/include",
+                "-I${workspaceFolder}/dependencies/GLM",
+                "-lopengl32",
+                "-L${workspaceRoot}/dependencies/GLFW/lib-mingw-w64",
+                "-static",
+                "-lglfw3dll",
                 "-o",
-                "$ {workspaceRoot} / main "
+                "${workspaceRoot}/builds/main"
             ],
             "group": "build",
             "problemMatcher": {
@@ -23,12 +31,12 @@
                     "${workspaceRoot}"
                 ],
                 "pattern": {
-                    "regexp": "^ (. *) : (\\ d +) : (\\ d +) : \\ s + ( 경고 오류) : \\ s + (. *) $ ",
-                    "file ": 1,
-                    "line ": 2,
-                    "column ": 3,
-                    "severity ": 4,
-                    "message ": 5
+                    "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning error):\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "severity": 4,
+                    "message": 5
                 }
             }
         },
@@ -37,14 +45,14 @@
             "command": "cmd",
             "group": "test",
             "args": [
-                "/ C",
-                "$ {workspaceRoot} / $ {fileBasenameNoExtension}"
+                "/C",
+                "${workspaceRoot}/builds\\${fileBasenameNoExtension}"
             ]
         },
         {
             "type": "cppbuild",
-            "label": "C/C++: g++.exe 활성 파일 빌드",
-            "command": "C:/mingw64/bin/g++.exe",
+            "label": "C/C++: cpp.exe 활성 파일 빌드",
+            "command": "C:\\mingw64\\bin\\cpp.exe",
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
@@ -53,16 +61,13 @@
                 "${fileDirname}\\${fileBasenameNoExtension}.exe"
             ],
             "options": {
-                "cwd": "C:/mingw64/bin"
+                "cwd": "${fileDirname}"
             },
             "problemMatcher": [
                 "$gcc"
             ],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
-            "detail": "디버거에서 생성된 작업입니다."
+            "group": "build",
+            "detail": "컴파일러: C:\\mingw64\\bin\\cpp.exe"
         }
     ]
 }
